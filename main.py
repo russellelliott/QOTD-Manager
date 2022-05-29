@@ -4,7 +4,8 @@ import os
 from dotenv import load_dotenv
 load_dotenv() #take environment variables from .env
 
-import requests
+import requests #for sending message
+from csv import writer #for adding data to csv
 
 #channel id and authorization tag are stored in env file for security/privacy purposes
 id = os.environ.get("ID")#channel id for headstarter #general
@@ -50,5 +51,24 @@ if __name__ == "__main__":
             message = input()
             if(message.lower() == "exit"):
                 break
+            #add question id, message, and status to csv file
+            #iterate through file, count lines
+            with open("questions.csv", 'r') as fp:
+                number = sum(1 for line in fp)
+                print('Total lines:', number)
+            fp.close()
+            #https://www.delftstack.com/howto/python/python-append-to-csv/
+            # First, open the old CSV file in append mode, hence mentioned as 'a'
+            # Then, for the CSV file, create a file object
+            with open("questions.csv", "a", newline='') as f_object:
+                #data to add
+                list_data = [number, message]
+                # Pass the CSV  file object to the writer() function
+                writer_object = writer(f_object)
+                # Result - a writer object
+                # Pass the data in the list as an argument into the writerow() function
+                writer_object.writerow(list_data)  
+                # Close the file object
+                f_object.close()
             #at this point, message is sent
-            makeMessage(message)
+            #makeMessage(message)
