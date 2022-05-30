@@ -28,7 +28,7 @@ def makeMessage(content):
 
     #make the post with the data and header
     r = requests.post(url, data=payload, headers=header)
-    #questions and their statuses will be stored in questions.csv
+    #questions will be stored in questions.txt
 
 #print a list of commands
 def help():
@@ -38,7 +38,7 @@ def help():
     print("send: upon entering this command, you have the option to add a question to the end of the list, or type \"exit\" to exit.")
     print("delete: upon entering this command, you have the option to delete a question by specifying its number, or type \"exit\" to exit. ")
 
-questions = "questions.csv" #file that stores questions
+questions = "questions.txt" #file that stores questions
 #main function
 if __name__ == "__main__":
     while(True):
@@ -53,26 +53,9 @@ if __name__ == "__main__":
             message = input()
             if(message.lower() == "exit"):
                 break
-            #add question id, message, and status to csv file
-            #iterate through file, count lines
-            #https://pynative.com/python-count-number-of-lines-in-file/
-            with open(questions, 'r') as fp:
-                number = sum(1 for line in fp)
-                print('Total lines:', number)
-            fp.close()
-            #https://www.delftstack.com/howto/python/python-append-to-csv/
-            # First, open the old CSV file in append mode, hence mentioned as 'a'
-            # Then, for the CSV file, create a file object
-            with open(questions, "a", newline='') as f_object:
-                #data to add
-                list_data = [number, message]
-                # Pass the CSV  file object to the writer() function
-                writer_object = writer(f_object)
-                # Result - a writer object
-                # Pass the data in the list as an argument into the writerow() function
-                writer_object.writerow(list_data)  
-                # Close the file object
-                f_object.close()
+            with open(questions, "a") as myfile:
+                myfile.write(message)
+                myfile.write("\n")
             #at this point, message is sent
             #makeMessage(message)
         if(command.lower()=="delete"):
