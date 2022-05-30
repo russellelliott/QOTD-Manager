@@ -1,11 +1,3 @@
-banana
-bello
-snoop
-hello
-are turtles cool?
-turtles are amazing
-amazing
-slug
 What programming languages are you familiar with?
 
 Describe the last project you worked on, including any obstacles and your contributions to its success.

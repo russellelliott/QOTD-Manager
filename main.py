@@ -69,7 +69,7 @@ def addQuestion(fileName, message):
     addLine(questions, message)
     print("Adding: ", message)
     command = "/custom add "
-    #makeMessage(command + message)
+    makeMessage(command + message)
 
 #main function
 if __name__ == "__main__":
@@ -90,7 +90,7 @@ if __name__ == "__main__":
         if(command.lower()=="file"):
             with open(fileInput, "r", newline='') as f_object:
                 for line in f_object:
-                    print(line)
+                    #fiprint(line)
                     addQuestion(questions, line)
             open(fileInput, "w").close() #clear contents of the file
                     
@@ -110,7 +110,7 @@ if __name__ == "__main__":
                             #proceed with deletion
                             print("Deleting the question")
                             command = "/custom delete "
-                            #makeMessage(command + line)
+                            makeMessage(command + line)
                             remove_line(questions, num)
                         else:
                             print("Deletion canceled")
