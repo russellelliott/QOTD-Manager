@@ -38,6 +38,7 @@ def help():
     print("delete: upon entering this command, you have the option to delete a question by specifying its number, or type \"exit\" to exit. ")
 
 questions = "questions.txt" #file that stores questions
+fileInput = "input.txt" #file for adding multiple questions
 
 #https://www.pythonforbeginners.com/files/how-to-delete-a-specific-line-in-a-file
 def remove_line(fileName,lineToSkip):
@@ -56,10 +57,18 @@ def remove_line(fileName,lineToSkip):
             currentLine += 1
 
 def addLine(fileName, message):
+    """Add new line to a given file"""
     with open(fileName, "a") as myfile:
         #https://stackoverflow.com/questions/4706499/how-do-you-append-to-a-file
         myfile.write(message)
         myfile.write("\n")
+
+def addQuestion(fileName, message):
+    """Add a question to the server"""
+    addLine(questions, message)
+    print("Adding: ", message)
+    command = "/custom add "
+    #makeMessage(command + message)
 
 #main function
 if __name__ == "__main__":
@@ -76,9 +85,7 @@ if __name__ == "__main__":
             if(message.lower() == "exit"):
                 break
             #at this point, message is sent
-            addLine(questions, message)
-            command = "/custom add "
-            #makeMessage(command + message)
+            addQuestion(questions, message)
         if(command.lower()=="delete"):
             print("Type a question number to delete, or type \"exit\" to exit: ")
             question = int(input())
