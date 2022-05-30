@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 load_dotenv() #take environment variables from .env
 
 import requests #for sending message
-from csv import writer #for adding data to csv
 
 #channel id and authorization tag are stored in env file for security/privacy purposes
 id = os.environ.get("ID")#channel id for headstarter #general
@@ -56,6 +55,12 @@ def remove_line(fileName,lineToSkip):
 	
             currentLine += 1
 
+def addLine(fileName, message):
+    with open(fileName, "a") as myfile:
+        #https://stackoverflow.com/questions/4706499/how-do-you-append-to-a-file
+        myfile.write(message)
+        myfile.write("\n")
+
 #main function
 if __name__ == "__main__":
     while(True):
@@ -70,12 +75,10 @@ if __name__ == "__main__":
             message = input()
             if(message.lower() == "exit"):
                 break
-            with open(questions, "a") as myfile:
-                #https://stackoverflow.com/questions/4706499/how-do-you-append-to-a-file
-                myfile.write(message)
-                myfile.write("\n")
             #at this point, message is sent
-            #makeMessage(message)
+            addLine(questions, message)
+            command = "/custom add "
+            #makeMessage(command + message)
         if(command.lower()=="delete"):
             print("Type a question number to delete, or type \"exit\" to exit: ")
             question = int(input())
@@ -91,6 +94,8 @@ if __name__ == "__main__":
                         if(answer.lower() == "yes"):
                             #proceed with deletion
                             print("Deleting the question")
+                            command = "/custom delete "
+                            #makeMessage(command + line)
                             remove_line(questions, num)
                         else:
                             print("Deletion canceled")
