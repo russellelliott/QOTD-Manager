@@ -34,7 +34,7 @@ def help():
     print("PROGRAM COMMANDS")
     print("help: prints list of commands")
     print("exit: exit the program at any stage")
-    print("send: upon entering this command, you have the option to add a question to the end of the list, or type \"exit\" to exit.")
+    print("add: upon entering this command, you have the option to add a question to the end of the list, or type \"exit\" to exit.")
     print("delete: upon entering this command, you have the option to delete a question by specifying its number, or type \"exit\" to exit. ")
 
 questions = "questions.txt" #file that stores questions
@@ -70,8 +70,8 @@ if __name__ == "__main__":
             help()
         if(command.lower()=="exit"):
             break
-        if(command.lower()=="send"):
-            print("Type a message to send, or type \"exit\" to exit: ")
+        if(command.lower()=="add"):
+            print("Type a question to add, or type \"exit\" to exit: ")
             message = input()
             if(message.lower() == "exit"):
                 break
