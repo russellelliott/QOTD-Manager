@@ -62,14 +62,14 @@ def addLine(fileName, message):
     with open(fileName, "a") as myfile:
         #https://stackoverflow.com/questions/4706499/how-do-you-append-to-a-file
         myfile.write(message)
-        myfile.write("\n")
+        #myfile.write("\n")
 
 def addQuestion(fileName, message):
     """Add a question to the server"""
     addLine(questions, message)
     print("Adding: ", message)
     command = "/custom add "
-    makeMessage(command + message)
+    #makeMessage(command + message)
 
 #main function
 if __name__ == "__main__":
@@ -90,7 +90,7 @@ if __name__ == "__main__":
         if(command.lower()=="file"):
             with open(fileInput, "r", newline='') as f_object:
                 for line in f_object:
-                    #fiprint(line)
+                    print(line)
                     addQuestion(questions, line)
             open(fileInput, "w").close() #clear contents of the file
                     
