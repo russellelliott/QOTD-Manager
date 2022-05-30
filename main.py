@@ -69,7 +69,7 @@ def addQuestion(fileName, message):
     addLine(questions, message)
     print("Adding: ", message)
     command = "/custom add "
-    #makeMessage(command + message)
+    makeMessage(command + message)
 
 #main function
 if __name__ == "__main__":
@@ -88,6 +88,7 @@ if __name__ == "__main__":
             #at this point, message is sent
             addQuestion(questions, message)
         if(command.lower()=="file"):
+            makeMessage("========LIST OF COMMANDS========")
             with open(fileInput, "r", newline='') as f_object:
                 for line in f_object:
                     print(line)
