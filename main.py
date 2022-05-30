@@ -35,6 +35,7 @@ def help():
     print("help: prints list of commands")
     print("exit: exit the program at any stage")
     print("add: upon entering this command, you have the option to add a question to the end of the list, or type \"exit\" to exit.")
+    print("file: upon entering this commnand, you have the option to add a list of questions from input.txt")
     print("delete: upon entering this command, you have the option to delete a question by specifying its number, or type \"exit\" to exit. ")
 
 questions = "questions.txt" #file that stores questions
@@ -86,6 +87,13 @@ if __name__ == "__main__":
                 break
             #at this point, message is sent
             addQuestion(questions, message)
+        if(command.lower()=="file"):
+            with open(fileInput, "r", newline='') as f_object:
+                for line in f_object:
+                    print(line)
+                    addQuestion(questions, line)
+            open(fileInput, "w").close() #clear contents of the file
+                    
         if(command.lower()=="delete"):
             print("Type a question number to delete, or type \"exit\" to exit: ")
             question = int(input())
