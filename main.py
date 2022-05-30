@@ -39,6 +39,23 @@ def help():
     print("delete: upon entering this command, you have the option to delete a question by specifying its number, or type \"exit\" to exit. ")
 
 questions = "questions.txt" #file that stores questions
+
+#https://www.pythonforbeginners.com/files/how-to-delete-a-specific-line-in-a-file
+def remove_line(fileName,lineToSkip):
+    """ Removes a given line from a file """
+    with open(fileName,'r') as read_file:
+        lines = read_file.readlines()
+
+    currentLine = 1
+    with open(fileName,'w') as write_file:
+        for line in lines:
+            if currentLine == lineToSkip:
+                pass
+            else:
+                write_file.write(line)
+	
+            currentLine += 1
+
 #main function
 if __name__ == "__main__":
     while(True):
@@ -54,6 +71,7 @@ if __name__ == "__main__":
             if(message.lower() == "exit"):
                 break
             with open(questions, "a") as myfile:
+                #https://stackoverflow.com/questions/4706499/how-do-you-append-to-a-file
                 myfile.write(message)
                 myfile.write("\n")
             #at this point, message is sent
@@ -63,27 +81,19 @@ if __name__ == "__main__":
             question = int(input())
             #find that question number in the csv file
             num = 1 #row number
-            delete = False
             with open(questions, "r+", newline='') as f_object: #read and write
                 for line in f_object:
-                    #https://stackoverflow.com/questions/4796764/read-file-from-line-2-or-skip-header-row
-                    next(f_object) #skip header row
-                    #print(num)
-                    if(line[0]==str(question)):
+                    if(num==question):
                         print("FOUND")
                         print(line)
                         print("Delete this question? yes/no: ")
                         answer = input()
                         if(answer.lower() == "yes"):
                             #proceed with deletion
-                            delete = True
                             print("Deleting the question")
-                            pass
+                            remove_line(questions, num)
                         else:
                             print("Deletion canceled")
-                    elif(line[0]>str(question) and delete): #only need to change id numbers if deletion is occurring
-                        #fix the id numbers after question is deleted
-                        pass
                     num+=1
                         
             
